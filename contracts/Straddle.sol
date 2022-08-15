@@ -3,14 +3,12 @@ pragma solidity ^0.8.9;
 
 import "hardhat/console.sol";
 import { LyraAdapter } from "@lyrafinance/protocol/contracts/periphery/LyraAdapter.sol";
-import { DecimalMath } from "@lyrafinance/protocol/contracts/synthetix/DecimalMath.sol";
 
 // This simple contract allows users to 
 // purchase a straddle (long call + long put) atomically
 // https://www.investopedia.com/trading/options-strategies/#toc-6-long-straddle
 
 contract Straddle is LyraAdapter {
-  using DecimalMath for uint;
   constructor() LyraAdapter() {}
 
   function initAdapter(
@@ -51,7 +49,7 @@ contract Straddle is LyraAdapter {
       positionId: 0,
       iterations: 3,
       optionType: OptionType.LONG_CALL,
-      amount: amount.divideDecimal(2),
+      amount: amount,
       setCollateralTo: 0,
       minTotalCost: 0,
       maxTotalCost: type(uint).max,

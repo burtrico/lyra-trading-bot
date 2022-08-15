@@ -1,5 +1,6 @@
 import "@nomicfoundation/hardhat-toolbox";
 import 'hardhat-dependency-compiler'
+import 'hardhat-tracer';
 import { HardhatUserConfig } from "hardhat/config";
 import { lyraContractPaths } from '@lyrafinance/protocol/dist/test/utils/package/index-paths'
 

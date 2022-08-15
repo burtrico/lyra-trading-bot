@@ -4,6 +4,7 @@ import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import { ethers } from 'hardhat';
 import { Straddle } from '../typechain-types';
 import { BigNumber } from 'ethers';
+import { expect } from 'chai';
 
 describe('Integration Test', () => {
   let deployer: SignerWithAddress;
@@ -27,7 +28,7 @@ describe('Integration Test', () => {
     alice = (await ethers.getSigners())[1];
     bob = (await ethers.getSigners())[2];
 
-    lyraTestSystem = await TestSystem.deploy(deployer);
+    lyraTestSystem = await TestSystem.deploy(deployer, true);
     await TestSystem.seed(deployer, lyraTestSystem, {
       initialBoard: boardParameter,
       initialBasePrice: spotPrice,
@@ -46,12 +47,25 @@ describe('Integration Test', () => {
     );
   });
 
-  it('opens staddle', async () => {
+  it('opens a staddle', async () => {
     await await lyraTestSystem.snx.quoteAsset.mint(alice.address, toBN('1000'));
-
     await lyraTestSystem.snx.quoteAsset.connect(alice).approve(straddle.address, lyraConstants.MAX_UINT);
-    // buy 5 straddle contract for $2000 strike option (pay up to $1000)
-    straddle.connect(alice).openStraddle(2, toBN("5"), toBN("1000"));
+
+    // buy 2 straddle contracts for the $2000 strike option (pay up to $1000)
+    await straddle.connect(alice).openStraddle(3, toBN("2"), toBN("1000"));
+
+    // alice spends ~$525 on 2 long puts and 2 long calls
+    expect(
+      await lyraTestSystem.snx.quoteAsset.balanceOf(alice.address)
+    ).to.be.eq(toBN("473.460934382107604218"));
+
+    // alice owns both options
+    expect(
+      await lyraTestSystem.optionToken.ownerOf(1)
+    ).to.be.eq(alice.address);    
+    expect(
+      await lyraTestSystem.optionToken.ownerOf(2)
+    ).to.be.eq(alice.address);  
   });
 
 });
