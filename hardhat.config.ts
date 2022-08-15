@@ -15,7 +15,15 @@ const config: HardhatUserConfig = {
       gasPrice: 0,
     }
   },
-  solidity: "0.8.9",
+  solidity: {
+    version: "0.8.9",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 10000,
+      },
+    },
+  },
   dependencyCompiler: {
     paths: lyraContractPaths,
   }
