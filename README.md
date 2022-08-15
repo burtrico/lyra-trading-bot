@@ -1,6 +1,6 @@
 # Boilerplate Grant Project
 
-This project demonstrates a basic contract built, tested and deployed on top of Lyra. 
+This project demonstrates a basic options straddle contract built, tested and deployed on top of Lyra. 
 
 Try running some of the following tasks:
 
