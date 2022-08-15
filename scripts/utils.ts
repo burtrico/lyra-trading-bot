@@ -1,6 +1,5 @@
 import path from "path";
 import dotenv from 'dotenv';
-import ethers from 'hardhat'
 
 export function loadEnv() {
   const defaultEnv = dotenv.config({
@@ -20,7 +19,7 @@ export function loadEnv() {
 export function loadParams(network: string) {
   return require(path.join(
     __dirname,
-    '../../deployments',
+    '../deployments',
     network,
     'params.json',
   ));
