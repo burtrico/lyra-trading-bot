@@ -1,6 +1,7 @@
 import "@nomicfoundation/hardhat-toolbox";
 import 'hardhat-dependency-compiler'
 import 'hardhat-tracer';
+import '@nomiclabs/hardhat-etherscan';
 import * as dotenv from 'dotenv';
 import { HardhatUserConfig } from "hardhat/config";
 import { lyraContractPaths } from '@lyrafinance/protocol/dist/test/utils/package/index-paths'
@@ -32,6 +33,19 @@ const config: HardhatUserConfig = {
   },
   dependencyCompiler: {
     paths: lyraContractPaths,
+  },
+  etherscan: {
+    apiKey: loadEnv().ETHERSCAN_KEY,
+    customChains: [
+      {
+        network: "goerli-ovm",
+        chainId: 420,
+        urls: {
+          apiURL: "https://blockscout.com/optimism/goerli/api",
+          browserURL: "https://blockscout.com/optimism/goerli"
+        }
+      }
+    ]
   }
 };
 

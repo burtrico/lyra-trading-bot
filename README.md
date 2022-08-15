@@ -1,6 +1,6 @@
 # Boilerplate Grant Project
 
-This project demonstrates a basic contract built on top of Lyra. 
+This project demonstrates a basic contract built, tested and deployed on top of Lyra. 
 
 Try running some of the following tasks:
 
@@ -8,4 +8,5 @@ Try running some of the following tasks:
 yarn hardhat compile
 yarn hardhat test
 yarn hardhat run scripts/deploy.ts
+yarn hardhat verify --network goerli-ovm <straddle contract address>
 ```
