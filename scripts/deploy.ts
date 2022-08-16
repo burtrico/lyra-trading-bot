@@ -10,8 +10,8 @@ async function main() {
   const params = loadParams(hre.network.name);
 
   // get lyra addresses
-  // const lyraGlobal = getGlobalDeploys(hre.network.name) as LyraGlobal;
-  // const lyraMarket = getMarketDeploys(hre.network.name, params.market) as LyraMarket;
+  const lyraGlobal = getGlobalDeploys(hre.network.name) as LyraGlobal;
+  const lyraMarket = getMarketDeploys(hre.network.name, params.market) as LyraMarket;
 
   // deploy straddle 
   const Straddle = await ethers.getContractFactory('Straddle');
@@ -20,10 +20,10 @@ async function main() {
 
   // initialize lyra adapter
   straddle.connect(deployer).initAdapter(
-    "0xabc92540e5D728C7E3E0f53dB2516cf4b8D5B854", // lyraGlobal.LyraRegistry.address,
-    "0x797383C9B6Ab622767912C26b7675259A875F449", // lyraMarket.OptionMarket.address,
-    lyraConstants.ZERO_ADDRESS, // Curve sUSD address not needed for straddle
-    lyraConstants.ZERO_ADDRESS, // lyraGlobal.BasicFeeCounter.address not set in Goerli yet
+    lyraGlobal.LyraRegistry.address,
+    lyraMarket.OptionMarket.address,
+    lyraConstants.ZERO_ADDRESS, // Curve sUSD pool address not needed
+    lyraConstants.ZERO_ADDRESS, // BasicFeeCounter not set in Goerli yet
   );
   console.log("Initialized Lyra Adapter");
 }
