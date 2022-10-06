@@ -2,9 +2,7 @@ const { _fetchData } = require('ethers/lib/utils');
 const sum = require('./sandbox');
 
 let count = 1;
-// note that these tests will ALL interact with the variable
-
-
+// note that these tests will ALL interact with the count
 
 beforeAll(() => {
     count = 1
@@ -31,8 +29,6 @@ describe('test numbers', () => {
         expect(sum(2, 2)).toBe('invalid numbers');
     })
 })
-
-
 
 test('should match object with passed in object', () => {
     const data = {firstName: 'tony'};
@@ -95,7 +91,6 @@ test('should return data from the fetch function', () => {
         expect(data).toEqual({firstName: 'tony', lastName: 'kim'})
     })
 })
-
 
 //MOCK FUNCTIONS
 
