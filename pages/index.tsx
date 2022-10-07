@@ -18,9 +18,7 @@ const Home: NextPage = () => {
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
 
- 
         <Header />
-
 
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
