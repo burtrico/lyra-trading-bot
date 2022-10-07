@@ -111,7 +111,7 @@ describe('insert transaction', () => {
     let db;
 
     //setup and kick up our database connection
-    beforeAll(async () => {
+    beforeAll(async () => { 
         connection = await MongoClient.connect(mongoURL, {
             useNewUrlParser: true, 
             useUnifiedTopology: true
