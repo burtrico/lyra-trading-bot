@@ -14,8 +14,10 @@ export const providerOptions = {
     }
 }
 
+// Confirm metamask is useable, confirm which chains
+
 export async function ConnectWallet() {
-    const [web3ModalProvider, setWeb3Provider] = useState<Web3Provider>(null)
+    const [web3ModalProvider, setWeb3Provider] = useState<Web3Provider>()  //should have null for init state
 
     try {
         let web3Modal = new Web3Modal({
